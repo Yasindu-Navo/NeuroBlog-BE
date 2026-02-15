@@ -11,6 +11,9 @@ export const adminLogin = async (req,res) => {
         const token = jwt.sign({ email }, process.env.JWT_SECRET) 
        return res.json({success: true,token})
     } catch (error) {
-      return  res.json({ success: false, message: error.message });
+        return res.json({ success: false, message: error.message });
+        
     }
 }
+
+
