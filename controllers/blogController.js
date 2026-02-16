@@ -1,4 +1,5 @@
-
+import fs from 'fs'
+import imageKIT from '../configs/imageKit.js';
 
 
 export const addBlog = async (req, res) => {
@@ -16,7 +17,18 @@ export const addBlog = async (req, res) => {
         
     }
 
+        //convert the image into BASE64
+        const imageBUffer = fs.readFileSync(imageFile.path)
 
+        //uplaod to the imageKIT
+        const response = await imageKIT.upload({
+            file: imageBUffer, 
+            fileName: imageFile.originalname,
+            folder : '/blogs'
+            
+        })
+
+       
 
 } catch (error) {
     
