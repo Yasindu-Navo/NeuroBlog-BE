@@ -28,6 +28,21 @@ export const addBlog = async (req, res) => {
             
         })
 
+        //optimization through imagekit URL Transformation
+
+        const optimizedURL = imageKIT.url({
+            path: response.filePath,
+            transformation: [
+                { quality: 'auto' },
+                { format: 'webp' },
+                {width:'1280'}
+                
+            ]
+        })
+
+        //final one for save in DB
+        const image = optimizedURL;
+
        
 
 } catch (error) {
