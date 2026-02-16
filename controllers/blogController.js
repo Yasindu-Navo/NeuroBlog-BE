@@ -1,5 +1,6 @@
 import fs from 'fs'
 import imageKIT from '../configs/imageKit.js';
+import Blog from '../models/blog.js';
 
 
 export const addBlog = async (req, res) => {
@@ -43,10 +44,17 @@ export const addBlog = async (req, res) => {
         //final one for save in DB
         const image = optimizedURL;
 
+        //save the data in the DB
+
+        await Blog.create({ tittle, subTittle, description, category, image, isPublished })
+       return res.json({ sucess: true, message: "Blog added successfully" });
+
+
+
        
 
 } catch (error) {
-    
+    res.json({sucess: false, message: error.message })
 }
 
 
