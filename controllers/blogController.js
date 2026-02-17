@@ -1,6 +1,7 @@
 import fs from 'fs'
 import imageKIT from '../configs/imageKit.js';
 import Blog from '../models/blog.js';
+import Comment from '../models/comment.js';
 
 
 export const addBlog = async (req, res) => {
@@ -119,4 +120,17 @@ export const togglePublished = async (req, res) => {
     } catch (error) {
          return res.json({ sucess: false, message: error.message } )
     }
+}
+
+export const addComment = async (req,res) => {
+    
+    try {
+        const {blog, name, content} = req.body;
+        await Comment.create({ blog, name, content });
+         return res.json({sucess:true, message:"Comment added for review"})
+        
+    } catch (error) {
+        return res.json({ sucess: false, message: error.message } )
+    }
+
 }
