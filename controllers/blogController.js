@@ -92,3 +92,28 @@ export const getBlogByID = async (res,req) => {
 }
 
 
+
+export const deleteBlogByID = async (res,req) => {
+    
+    try {
+        const { id } = req.body;
+        
+        await Blog.findByIdAndDelete(id);
+        return res.json({ sucess: true, message: "Blog delete sucessfully" })
+
+        
+    } catch (error) {
+        return res.json({ sucess: false, message: error.message } )
+    }
+}
+
+export const togglePublished = async (res, req) => {
+    
+    try {
+        const { id } = req.body;
+        const blog = await Blog.findById(id);
+        
+    } catch (error) {
+         return res.json({ sucess: false, message: error.message } )
+    }
+}
