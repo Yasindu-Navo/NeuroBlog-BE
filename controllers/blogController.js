@@ -112,7 +112,14 @@ export const togglePublished = async (res, req) => {
     try {
         const { id } = req.body;
         const blog = await Blog.findById(id);
-        
+        if (!blog) {
+            return res.json({sucess:false,message:"Blog cannot find"})
+        } 
+
+        blog.isPublished = !blog.isPublished
+        await blog.save();
+        return res.json({sucess:true,message:"Blog status updated"})
+
     } catch (error) {
          return res.json({ sucess: false, message: error.message } )
     }
