@@ -64,3 +64,15 @@ export const getDashboardData = async (req, res) => {
             }
 
 }
+
+export const deleteCommentById = async (req, res) => {
+    
+    try {
+        const { id } = req.body;
+        await Comment.findByIdAndDelete(id);
+        return res.json({ success: true, message: "comment delete sucessfully" });
+        
+    } catch (error) {
+        return res.json({ success: false, message: error.message });
+    }
+}
