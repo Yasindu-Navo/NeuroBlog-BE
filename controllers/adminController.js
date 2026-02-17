@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import Blog from '../models/blog.js';
+import Comment from '../models/comment.js';
 
 
 export const adminLogin = async (req,res) => {
@@ -30,5 +31,16 @@ export const getAllBlogsAdmin = async (req, res) => {
 }
 
 
+
+export const getAllComments = async (req, res) => {
+    
+    try {
+        const comments = await Comment.find({}).populate("blog").sort({ createdAt: -1 });
+         return res.json({ success: true, comments });
+
+    } catch (error) {
+         return res.json({ success: false, message: error.message });
+    }
+}
 
 
