@@ -74,4 +74,21 @@ export const getAllBlogs = async (req,res) => {
 
 }
 
+export const getBlogByID = async (res,req) => {
+    
+    try {
+        const { blogId } = req.parse;
+        const blog = await Blog.findById(blogId)
+
+        if (!blog) {
+            return res.json({ sucess: false, message: "Blog cannot find" } )
+        } else {
+            return res.json({sucess:true},blog)
+        }
+        
+    } catch (error) {
+        return res.json({ sucess: false, message: error.message } )
+    }
+}
+
 
