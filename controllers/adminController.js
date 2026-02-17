@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import Blog from '../models/blog.js';
 
 
 export const adminLogin = async (req,res) => {
@@ -15,5 +16,19 @@ export const adminLogin = async (req,res) => {
         
     }
 }
+
+
+export const getAllBlogsAdmin = async (req, res) => {
+    
+    try {
+        const blogs = await Blog.find({}).sort({createdAt:-1})
+         return res.json({ success: true, blogs });
+
+    } catch (error) {
+         return res.json({ success: false, message: error.message });
+    }
+}
+
+
 
 
