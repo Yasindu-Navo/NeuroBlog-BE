@@ -13,7 +13,7 @@ export const addBlog = async (req, res) => {
     
     //checking all fields are exsits
 
-    if (!tittle || !description || !category || !imageFile || !isPublished) {
+    if (!tittle || !description || !category || !isPublished) {
         return res.send({ sucess: false, message: "Missing required fields" })
         
     }
@@ -61,5 +61,17 @@ export const addBlog = async (req, res) => {
     
     
 };
+
+
+export const getAllBlogs = async (req,res) => {
+    
+    try {
+        const blogs = await Blog.find({ isPublished: true });
+        res.json({sucess:true,blogs})
+    } catch (error) {
+        res.json({sucess:false,message:error.message})
+    }
+
+}
 
 
